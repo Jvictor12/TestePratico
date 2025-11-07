@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: photos_db
+    restart: always
+    environment:
+      POSTGRES_DB: photos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - photos-network
+
+  app:
+    build: .
+    container_name: photos_app
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/photos
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      API_KEY: ${API_KEY}
+    depends_on:
+      - db
+    networks:
+      - photos-network
+
+volumes:
+  pgdata:
+
+networks:
+  photos-network:
+    driver: bridge
