@@ -26,12 +26,12 @@ Também expõe uma **API RESTful** para consultar os dados salvos.
 ---
 
 ## Endpoints 
-POST /photos/fetch?limit={número}
-Exemplo:
-POST http://localhost:9000/photos/fetch?limit=5
-GET /photos
-Exemplo:
-http://localhost:9000/photos
-GET /photos/{id}
-Exemplo:
-http://localhost:9000/photos/bss
+- POST /photos/fetch?limit={número}
+- Exemplo:
+- POST http://localhost:9000/photos/fetch?limit=5
+- GET /photos
+- Exemplo:
+- http://localhost:9000/photos
+- GET /photos/{id}
+- Exemplo:
+- http://localhost:9000/photos/bss
